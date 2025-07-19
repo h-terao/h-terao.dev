@@ -1,0 +1,38 @@
+{
+  "name": "h-terao.dev",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/sitemap": "^3.4.1",
+    "@daiji256/rehype-mathml": "^1.2.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^5.11.0",
+    "astro-expressive-code": "^0.41.3",
+    "astro-iconify": "^1.2.0",
+    "clsx": "^2.1.1",
+    "rehype-callouts": "^2.1.1",
+    "remark-link-card-plus": "^0.5.0",
+    "remark-math": "^6.0.0",
+    "sharp": "^0.34.2",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.1.2",
+    "@types/node": "^24.0.10",
+    "ts-node": "^10.9.2",
+    "typescript": "5.8.3"
+  },
+  "trustedDependencies": [
+    "@tailwindcss/oxide",
+    "protobufjs"
+  ]
+}

@@ -1,0 +1,56 @@
+---
+import type { MarkdownHeading } from "astro";
+import { Icon } from "astro-iconify";
+import { cn } from "@/lib";
+
+type Props = {
+  headings: MarkdownHeading[];
+  maxDepth?: number;
+};
+
+const { headings, maxDepth = 3 } = Astro.props;
+---
+<details class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+  <summary class="text-lg font-semibold cursor-pointer flex items-center gap-2 text-body/80 hover:text-primary transition-colors">
+    <Icon name="iconoir:list" class="size-5" />
+    Table of Contents
+  </summary>
+  <nav class="mt-4">
+    <ul class="space-y-1">
+      {headings
+        .filter((heading) => heading.depth <= maxDepth)
+        .map((heading) => (
+          <li
+            class={cn(
+              // "border-l-2 transition-all duration-200 hover:border-primary",
+              heading.depth === 1 && "pl-2 border-gray-300",
+              heading.depth === 2 && "pl-4 border-gray-300",
+              heading.depth === 3 && "pl-6 border-gray-200",
+              heading.depth === 4 && "pl-8 border-gray-200",
+              heading.depth === 5 && "pl-10 border-gray-100",
+              heading.depth >= 6 && "pl-12 border-gray-100"
+            )}
+          >
+            <a
+              href={`#${heading.slug}`}
+              class={cn(
+                "block py-1 px-2 rounded text-body/70 hover:text-primary hover:bg-white transition-all duration-200",
+                heading.depth === 1 && "font-semibold text-lg",
+                heading.depth === 2 && "font-medium text-base",
+                heading.depth === 3 && "text-sm",
+                heading.depth >= 4 && "text-xs text-body/60"
+              )}
+            >
+              <span class="flex items-center gap-2">
+                {heading.depth === 1 && <span class="w-1.5 h-1.5 bg-primary rounded-full"></span>}
+                {heading.depth === 2 && <span class="w-1 h-1 bg-gray-400 rounded-full"></span>}
+                {heading.depth >= 3 && <span class="w-0.5 h-0.5 bg-gray-300 rounded-full"></span>}
+                {heading.text}
+              </span>
+            </a>
+          </li>
+        )
+      )}
+    </ul>
+  </nav>
+</details>

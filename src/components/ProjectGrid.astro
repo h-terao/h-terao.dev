@@ -1,0 +1,45 @@
+---
+import { Icon } from "astro-iconify";
+import { cn } from "@/lib";
+import type { ProjectGroup } from "@/types.ts";
+
+type Props = {
+  group: ProjectGroup;
+};
+
+const { group } = Astro.props;
+---
+<div>
+  <h2 class="text-3xl mb-4 text-headline font-headline font-bold">{group.name}</h2>
+  {group.description && <p class="text-sm text-gray-600 mb-4">{group.description}</p>}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {group.projects.map((project) => (
+      <div class={cn(
+        "group relative cursor-pointer block overflow-hidden rounded-xl",
+        "bg-white border-black border-1 p-4",
+        "hover:transition-colors hover:border-primary",
+      )}
+        onclick={`location.href='${project.link || "#"}'`}
+      >
+        <h3 class="text-xl font-semibold group-hover:text-primary mb-2">{project.name}</h3>
+        <p class="text-sm text-gray-600 mb-2">{project.description}</p>
+        <div class="flex flex-row gap-2 text-gray-600">
+          {project.codeLink && (
+            <a href={project.codeLink}>
+              <Icon name="iconoir:github" class="inline-block size-5 hover:text-primary" />
+            </a>
+          )}
+          {project.documentLink && (
+            <a href={project.documentLink}>
+              <Icon name="iconoir:book" class="inline-block size-5 hover:text-primary" />
+            </a>
+          )}
+          {project.siteLink && (
+            <a href={project.siteLink}>
+              <Icon name="iconoir:internet" class="inline-block size-5 hover:text-primary" />
+            </a>
+          )}
+        </div>
+      </div>
+    ))}
+</div>

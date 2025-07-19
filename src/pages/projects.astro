@@ -1,0 +1,23 @@
+---
+import ProjectGrid from "@/components/ProjectGrid.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { githubUser, projectGroups } from "@/site.config";
+---
+<BaseLayout>
+  <h1 class="text-3xl text-left text-headline font-headline font-bold">Projects</h1>
+  <div class="flex flex-col gap-12 mt-4">
+    <div class="flex flex-col gap-4">
+      <span class="text-gray-600">
+        GitHub Activities:
+      </span>
+      <img
+        src=`https://ghchart.rshah.org/${githubUser}`
+        alt=`${githubUser}'s Github chart`
+        class="mx-auto w-full"
+      />
+    </div>
+    {projectGroups.map((projectGroup) => (
+      <ProjectGrid group={projectGroup} />
+    ))}
+  </div>
+</BaseLayout>

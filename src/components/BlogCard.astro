@@ -1,0 +1,67 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { cn, fetchCoverImage, formatDate, getTagByName } from "@/lib";
+
+type Props = {
+  entry: CollectionEntry<"blog">;
+  class?: string;
+};
+
+const { entry, class: className } = Astro.props;
+const { title, description, published } = entry.data;
+const tags = entry.data.tags?.map((tag) => getTagByName(tag)) || [];
+const coverImage = await fetchCoverImage(entry);
+---
+<div
+  onclick={`location.href='/blog/entry/${entry.id}'`}
+  class={cn(
+    "group relative cursor-pointer block overflow-hidden rounded-xl",
+    "bg-white border-black border-1 p-4",
+    "hover:transition-colors hover:border-primary",
+    // "shadow-sm transition-shadow hover:shadow-md",
+    className,
+  )}
+>
+  {coverImage && (
+    <Image
+      src={coverImage}
+      alt={title}
+      class={cn(
+        "pointer-events-none select-none",
+        "absolute right-0 top-0 h-full w-2/3 object-cover",
+        "z-0 opacity-30 mix-blend-multiply transition-opacity",
+        "duration-300 group-hover:opacity-55",
+      )}
+      style="mask-image:linear-gradient(to right,transparent 0%,black 33%,black 100%); -webkit-mask-image:linear-gradient(to right,transparent 0%,black 33%,black 100%);"
+    />
+  )}
+  <div class="relative z-10 flex flex-col pr-[10%] gap-2">
+    <p class="text-sm font-mono text-gray-600">
+      {formatDate(published)}
+    </p>
+    <h2 class={cn(
+      "text-xl font-semibold",
+      "group-hover:transition-colors group-hover:text-primary",
+    )}>{ title }</h2>
+    <p class="text-sm line-clamp-2 text-gray-600">
+      { description }
+    </p>
+    <div>
+      {tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 relative z-30">
+          {tags.map((tag) => (
+            <a
+              class={cn(
+                "hover:cursor-pointer text-xs font-semibold mt-2 text-gray-600 hover:text-primary"
+              )}
+              href={tag.link}
+            >
+              {tag.name}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</div>

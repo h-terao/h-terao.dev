@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Evolve Sans";
+  src: url("/fonts/MADE Evolve Sans Regular EVO (PERSONAL USE).otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme {
+  /* --color-primary: #cc7000;
+  --color-accent: #cc3600;
+  --color-background: #fff8f0;
+  --color-headline: #332200;
+  --color-body: #332200;
+  --color-button: #cc7000;
+  --color-button-hover: #e68a00; */
+/*
+  --color-primary: #cc7000;
+  --color-background: #fff8f0;
+  --color-accent: #cc3600;
+  --color-headline: #332200;
+  --color-body: #332200; */
+
+  --color-primary: #c79a42;
+  --color-background: #f5f5f5;
+  --color-accent: #cc3600;
+  --color-headline: #332200;
+  --color-body: #332200;
+
+  --color-header-logo: var(--color-primary);
+  --color-footer-logo: var(--color-primary);
+
+  --font-headline: "IBM Plex Sans JP", sans-serif; /* Example headline font */
+  --font-body: "IBM Plex Sans JP", sans-serif; /* Example base font */
+  --font-mono: "IBM Plex Mono", monospace; /* Example monospace font */
+  --font-logo: "Evolve Sans"; /* Example logo font */
+
+  --text-article-h1: 2rem;
+  --text-article-h2: 2rem;
+  --text-article-h3: 1.5rem;
+  --text-article-h4: 1.25rem;
+  --text-article-h5: 1rem;
+  --text-article-h6: 0.875rem;
+
+  --text-xsmall: 0.625rem;
+  --text-small: 0.875rem;
+  --text-base: 1rem;
+  --text-large: 1.25rem;
+  --text-xlarge: 2rem;
+
+  --spacing-small: clamp(2rem, 10vw + 1rem, 6rem);
+  --spacing-base: clamp(4rem, 10vw + 1rem, 8rem);
+  --spacing-large: clamp(6rem, 10vw + 1rem, 10rem);
+
+  --container-small: 1000px;
+  --container-base: 1400px;
+
+  --border-radius-small: 0.5rem;
+  --border-radius-base: 1rem;
+  --border-radius-large: 2rem;
+}
+
+@layer components {
+  article h1 {
+    font-size: var(--text-article-h1);
+    font-family: var(--font-headline);
+    color: var(--color-headline);
+    font-weight: bold;
+    margin: 0 0 1.5rem;
+  }
+  article h2 {
+    font-size: var(--text-article-h2);
+    font-family: var(--font-headline);
+    color: var(--color-headline);
+    font-weight: bold;
+    margin: 0 0 1.5rem;
+  }
+  article h3 {
+    font-size: var(--text-article-h3);
+    font-family: var(--font-headline);
+    color: var(--color-headline);
+    font-weight: bold;
+    margin: 0 0 1.5rem;
+  }
+  article h4 {
+    font-size: var(--text-article-h4);
+    font-family: var(--font-headline);
+    color: var(--color-headline);
+    margin: 0 0 1.25rem;
+  }
+  article h5 {
+    font-size: var(--text-article-h5);
+    font-family: var(--font-headline);
+    color: var(--color-headline);
+    margin: 0 0 1.25rem;
+  }
+  article h6 {
+    font-size: var(--text-article-h6);
+    font-family: var(--font-headline);
+    color: var(--color-headline);
+    margin: 0 0 1rem;
+  }
+  article p {
+    color: var(--color-body);
+    font-size: var(--text-base);
+    margin: 0 0 1.75rem;
+    line-height: 1.5;
+  }
+  article a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  article ol {
+    color: var(--color-body);
+    font-size: var(--text-base);
+    margin: 0 0 2rem;
+    padding-left: 2rem;
+    list-style-type: decimal;
+  }
+  article ol ::marker {
+    color: var(--color-primary);
+  }
+  article ul {
+    color: var(--color-body);
+    font-size: var(--text-base);
+    margin: 0 0 2rem;
+    padding-left: 2rem;
+    list-style-type: disc;
+  }
+  article ul ::marker {
+    color: var(--color-primary);
+  }
+  article blockquote {
+    font-size: var(--text-base);
+    margin: 0 0 1.75rem;
+    padding-left: 2rem;
+    border-left: 4px solid var(--color-primary);
+  }
+  article img {
+    display: block;
+    margin: 1.75rem auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-small);
+  }
+
+  article .math,
+  article .katex-display,
+  article .MathJax_Display,
+  article mjx-container[display="block"],
+  article math[display="block"],
+  article .tml-display {
+    margin: 1.75rem 0;
+  }
+
+  article .expressive-code {
+    margin: 1.75rem 0;
+  }
+
+  .prose pre {
+    margin-bottom: 1.75rem;
+  }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+/* Style the pre element containing the code */
+pre {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+/* Style code blocks with a specific language */
+pre[class*="language-"] {
+  position: relative;
+}
+
+/* Style line numbers if enabled */
+.line-number {
+  color: #888;
+  margin-right: 1rem;
+}

@@ -1,0 +1,89 @@
+---
+import { Image } from "astro:assets";
+import { type CollectionEntry, render } from "astro:content";
+import { Icon } from "astro-iconify";
+import ToC from "@/components/ToC.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { fetchCoverImage, formatDate } from "@/lib";
+import type { Collection } from "@/types.ts";
+
+type Props = {
+  entry: CollectionEntry<Collection>;
+  enableToC?: boolean;
+};
+const { entry, enableToC = false } = Astro.props;
+const { title, description, published, updated, tags } = { tags: undefined, ...entry.data };
+const coverImage = await fetchCoverImage(entry);
+const { Content, headings } = await render(entry);
+---
+<BaseLayout>
+  <div class="flex flex-col gap-6 w-full">
+    {coverImage && (
+      <Image
+        src={coverImage}
+        alt={title}
+        class="w-full aspect-[16/9] rounded-xl object-cover"
+        format="webp"
+      />
+    )}
+
+    <!-- Metadata -->
+    <div class="text-body/60 flex flex-row items-center gap-4 text-sm">
+      <!-- Date -->
+      <div>
+        <Icon name="iconoir:calendar" class="size-4 inline-block" />
+        { formatDate(new Date(published)) }
+        { updated && (
+          <span>/ Updated {formatDate(new Date(updated))}</span>
+        )}
+      </div>
+
+      <!-- Tags -->
+      { tags && tags.length > 0 && (
+        <div class="gap-2">
+          <Icon name="iconoir:hashtag" class="size-4 inline-block" />
+          {tags.map((tag, index) => {
+            if (index !== tags.length - 1) {
+              return (
+                <a
+                  href={`/blog/tags/${tag}`}
+                  class="hover:text-primary"
+                >
+                  {tag}
+                </a>
+                <span class="text-body/60"> / </span>
+              );
+            }
+            return (
+              <a
+                href={`/blog/tags/${tag}`}
+                class="hover:text-primary"
+              >
+                {tag}
+              </a>
+            );
+          })}
+        </div>
+      )}
+    </div>
+
+    <!-- Title -->
+    <div class="flex flex-col gap-2">
+      <h1 class="text-4xl text-headline font-headline font-bold">{title}</h1>
+      <p class="text-sm text-body/60">{description}</p>
+    </div>
+
+    <!-- Table of Contents -->
+    { enableToC && headings.length > 0 && (
+      <ToC headings={headings} maxDepth={3} />
+    )}
+
+    <!-- Divider -->
+    <hr class="border-gray-300 my-4" />
+
+    <!-- Content preview -->
+    <article class="prose w-full">
+      <Content />
+    </article>
+  </div>
+</BaseLayout>

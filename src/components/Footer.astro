@@ -1,0 +1,36 @@
+---
+import { Icon } from "astro-iconify";
+import { cn } from "@/lib";
+import { siteConfig } from "@/site.config";
+
+type Props = {
+  class?: string;
+};
+const { class: className } = Astro.props;
+---
+<div class={cn("mx-auto px-4 py-4", className)}>
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+    <!-- Site Info -->
+    <div class="text-center sm:text-left">
+      <p class="text-xl sm:text-2xl text-footer-logo font-bold font-logo">
+        {siteConfig.title.toLocaleUpperCase()}
+      </p>
+      <p class="text-sm sm:text-base text-body">&copy; {new Date().getFullYear()} {siteConfig.author}. All rights reserved.</p>
+    </div>
+
+    <!-- Social Links -->
+    <div class="flex items-center space-x-4">
+      {siteConfig.footer.map((item) => (
+        <a
+          href={item.link}
+          class="text-body/60 hover:text-primary transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+          title={item.name}
+        >
+          <Icon name={item.icon} class="size-5 sm:size-6" />
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

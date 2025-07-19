@@ -1,0 +1,18 @@
+---
+import { type CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import EntryLayout from "@/layouts/EntryLayout.astro";
+import { getEntries } from "@/lib";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allEntries = await getEntries("blog");
+  return allEntries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+type Props = { entry: CollectionEntry<"blog"> };
+const { entry } = Astro.props;
+---
+<EntryLayout entry={entry} enableToC={true} />

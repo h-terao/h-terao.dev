@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import { pageSize } from "@/constants.ts";
+import ArchiveLayout from "@/layouts/ArchiveLayout.astro";
+import { getEntries, getTagByName, getTags, groupEntriesByTag } from "@/lib";
+import type { Tag } from "@/types.ts";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allEntries = await getEntries("blog");
+  const allTags = getTags(allEntries);
+  const groupedEntries = groupEntriesByTag(allEntries);
+  return Object.entries(groupedEntries).flatMap(([tag, entries]) => {
+    const paginatedEntries = paginate(entries, {
+      pageSize,
+      params: { tag },
+      props: { tag: getTagByName(tag), allTags },
+    });
+    return paginatedEntries;
+  });
+};
+
+type Props = {
+  page: Page<CollectionEntry<"blog">>;
+  tag: Tag;
+  allTags: Tag[];
+};
+
+const { page, tag, allTags } = Astro.props;
+---
+<ArchiveLayout
+  title={tag.name}
+  page={page}
+  tags={allTags}
+/>

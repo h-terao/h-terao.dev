@@ -1,0 +1,22 @@
+---
+import { siteConfig } from "@/site.config.ts";
+import "@/styles/global.css";
+import Footer from "@/components/Footer.astro";
+import Head from "@/components/Head.astro";
+import Header from "@/components/Header.astro";
+---
+<!DOCTYPE html>
+<html lang={ siteConfig.lang } class="smooth-scroll">
+  <Head />
+  <body class="flex flex-col min-h-screen w-full bg-background items-center">
+    <header class="w-5xl max-w-full mt-8 px-8">
+      <Header title={siteConfig.title} headerMenus={siteConfig.headerMenus} />
+    </header>
+    <main class="font-body w-5xl max-w-full my-16 px-8">
+      <slot />
+    </main>
+    <footer class="w-full border-t border-primary mt-auto">
+      <Footer class="w-5xl max-w-full" />
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Page } from "astro";
+import { Icon } from "astro-iconify";
+import { cn } from "@/lib";
+
+type Props = {
+  page: Page<CollectionEntry<"blog">>;
+  class?: string;
+};
+
+const { page, class: className } = Astro.props;
+const { currentPage, lastPage } = page;
+
+// ページ番号の配列を生成する関数
+function generatePageNumbers(current: number, total: number): (number | "...")[] {
+  if (total <= 7) {
+    // 総ページ数が7以下の場合は全て表示
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  const pages: (number | "...")[] = [];
+
+  // 常に1ページ目を表示
+  pages.push(1);
+
+  if (current <= 4) {
+    // 現在のページが最初の方にある場合
+    for (let i = 2; i <= Math.min(5, total - 1); i++) {
+      pages.push(i);
+    }
+    if (total > 5) {
+      pages.push("...");
+    }
+  } else if (current >= total - 3) {
+    // 現在のページが最後の方にある場合
+    if (total > 5) {
+      pages.push("...");
+    }
+    for (let i = Math.max(2, total - 4); i <= total - 1; i++) {
+      pages.push(i);
+    }
+  } else {
+    // 現在のページが中間にある場合
+    pages.push("...");
+    for (let i = current - 1; i <= current + 1; i++) {
+      pages.push(i);
+    }
+    pages.push("...");
+  }
+
+  // 常に最後のページを表示（1ページ目と同じでない場合）
+  if (total > 1) {
+    pages.push(total);
+  }
+
+  return pages;
+}
+
+const pageNumbers = generatePageNumbers(currentPage, lastPage);
+
+// 前のページと次のページのURL
+const prevUrl = currentPage > 1 ? (currentPage === 2 ? "/blog" : `/blog/${currentPage - 1}`) : null;
+const nextUrl = currentPage < lastPage ? `/blog/${currentPage + 1}` : null;
+
+// ページ番号のURL生成
+function getPageUrl(pageNum: number): string {
+  return pageNum === 1 ? "/blog" : `/blog/${pageNum}`;
+}
+---
+
+<nav class={cn("flex justify-center items-center gap-2", className)} aria-label="ページネーション">
+  <!-- 前のページボタン -->
+  {prevUrl ? (
+    <a
+      href={prevUrl}
+      class={cn(
+        "flex items-center justify-center w-10 h-10",
+        "text-body hover:text-primary transition-colors",
+        "disabled:opacity-50 disabled:cursor-not-allowed"
+      )}
+      aria-label="前のページ"
+    >
+      <Icon name="iconoir:nav-arrow-left" class="size-7" />
+    </a>
+  ) : (
+    <span
+      class={cn(
+        "flex items-center justify-center w-10 h-10",
+        "text-gray-400 cursor-not-allowed"
+      )}
+      aria-label="前のページ（無効）"
+    >
+      <Icon name="iconoir:nav-arrow-left" class="size-7" />
+    </span>
+  )}
+
+  <!-- ページ番号 -->
+  {pageNumbers.map((pageNum, index) => (
+    pageNum === "..." ? (
+      <span
+        class="flex items-center justify-center w-10 h-10 text-gray-500"
+        aria-hidden="true"
+      >
+        ...
+      </span>
+    ) : (
+      <a
+        href={getPageUrl(pageNum)}
+        class={cn(
+          "flex items-center justify-center w-10 h-10 rounded-lg",
+          "border transition-colors font-medium",
+          currentPage === pageNum
+            ? "bg-primary text-white border-primary"
+            : "border-gray-300 hover:border-primary text-body hover:text-primary hover:bg-blue-50"
+        )}
+        aria-label={currentPage === pageNum ? `現在のページ ${pageNum}` : `ページ ${pageNum}へ移動`}
+        aria-current={currentPage === pageNum ? "page" : undefined}
+      >
+        {pageNum}
+      </a>
+    )
+  ))}
+
+  <!-- 次のページボタン -->
+  {nextUrl ? (
+    <a
+      href={nextUrl}
+      class={cn(
+        "flex items-center justify-center w-10 h-10",
+        "text-body hover:text-primary transition-colors"
+      )}
+      aria-label="次のページ"
+    >
+      <Icon name="iconoir:nav-arrow-right" class="size-7" />
+    </a>
+  ) : (
+    <span
+      class={cn(
+        "flex items-center justify-center w-10 h-10",
+        "text-gray-400 cursor-not-allowed"
+      )}
+      aria-label="次のページ（無効）"
+    >
+      <Icon name="iconoir:nav-arrow-right" class="size-7" />
+    </span>
+  )}
+</nav>
