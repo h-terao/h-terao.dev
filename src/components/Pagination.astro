@@ -3,13 +3,15 @@ import type { CollectionEntry } from "astro:content";
 import type { Page } from "astro";
 import { Icon } from "astro-iconify";
 import { cn } from "@/lib";
+import type { Collection } from "@/types.ts";
 
 type Props = {
-  page: Page<CollectionEntry<"blog">>;
+  baseUrl: string;
+  page: Page<CollectionEntry<Collection>>;
   class?: string;
 };
 
-const { page, class: className } = Astro.props;
+const { baseUrl, page, class: className } = Astro.props;
 const { currentPage, lastPage } = page;
 
 // ページ番号の配列を生成する関数
@@ -65,7 +67,7 @@ const nextUrl = currentPage < lastPage ? `/blog/${currentPage + 1}` : null;
 
 // ページ番号のURL生成
 function getPageUrl(pageNum: number): string {
-  return pageNum === 1 ? "/blog" : `/blog/${pageNum}`;
+  return pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`;
 }
 ---
 

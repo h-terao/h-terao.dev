@@ -9,43 +9,34 @@ type Props = {
 };
 
 const { entry, class: className } = Astro.props;
-const { title, description, published } = entry.data;
+const slug = entry.id;
+const { title, published } = entry.data;
 const tags = entry.data.tags?.map((tag) => getTagByName(tag)) || [];
-const coverImage = await fetchCoverImage(entry);
 ---
 <div
   onclick={`location.href='/blog/entry/${entry.id}'`}
   class={cn(
-    "group relative cursor-pointer block overflow-hidden rounded-xl",
-    "bg-white border-black border-1 p-4",
+    "flex flex-col",
+    "group relative cursor-pointer block overflow-hidden",
+    "bg-white border-black border-1 rounded-xl",
     "hover:transition-colors hover:border-primary",
     // "shadow-sm transition-shadow hover:shadow-md",
     className,
   )}
 >
-  {coverImage && (
-    <Image
-      src={coverImage}
-      alt={title}
-      class={cn(
-        "pointer-events-none select-none",
-        "absolute right-0 top-0 h-full w-2/3 object-cover",
-        "z-0 opacity-30 mix-blend-multiply transition-opacity",
-        "duration-300 group-hover:opacity-55",
-      )}
-      style="mask-image:linear-gradient(to right,transparent 0%,black 33%,black 100%); -webkit-mask-image:linear-gradient(to right,transparent 0%,black 33%,black 100%);"
-    />
-  )}
-  <div class="relative z-10 flex flex-col pr-[10%] gap-2">
-    <p class="text-sm font-mono text-gray-600">
+  <Image
+    src={`/blog/entry/${slug}.png`}
+    alt={title}
+    class={cn(
+      "rounded-xl object-cover w-full rounded-b-none",
+    )}
+    width={630}
+    height={1200}
+    loading="lazy"
+  />
+  <div class="flex flex-col p-4">
+    <p class="text-sm text-gray-600">
       {formatDate(published)}
-    </p>
-    <h2 class={cn(
-      "text-xl font-semibold",
-      "group-hover:transition-colors group-hover:text-primary",
-    )}>{ title }</h2>
-    <p class="text-sm line-clamp-2 text-gray-600">
-      { description }
     </p>
     <div>
       {tags && tags.length > 0 && (
@@ -53,7 +44,7 @@ const coverImage = await fetchCoverImage(entry);
           {tags.map((tag) => (
             <a
               class={cn(
-                "hover:cursor-pointer text-xs font-semibold mt-2 text-gray-600 hover:text-primary"
+                "hover:cursor-pointer text-sm font-semibold mt-2 text-gray-600 hover:text-primary"
               )}
               href={tag.link}
             >

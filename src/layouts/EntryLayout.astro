@@ -8,7 +8,7 @@ import { fetchCoverImage, formatDate } from "@/lib";
 import type { Collection } from "@/types.ts";
 
 type Props = {
-  entry: CollectionEntry<Collection>;
+  entry: CollectionEntry<"blog">;
   enableToC?: boolean;
 };
 const { entry, enableToC = false } = Astro.props;

@@ -8,7 +8,7 @@ export const siteConfig: SiteConfig = {
   lang: "ja",
   headerMenus: [
     { name: "Blog", link: "/blog" },
-    { name: "Zenn", link: "https://zenn.dev/wintery_fish" },
+    { name: "Zenn", link: "/zenn" },
     { name: "Projects", link: "/projects" },
   ],
   footer: [

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "/wintery_fish/articles/typescript-exactly-one-type",
+    "title": "TypeScript でプロパティが排他的なオブジェクトを表現する Exclusive 型を作る",
+    "url": "https://zenn.dev/wintery_fish/articles/typescript-exactly-one-type",
+    "published": "2025-08-10T09:18:52.960Z",
+    "ogImage": "https://res.cloudinary.com/zenn/image/upload/s--x8svwRI1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2581%258C%25E6%258E%2592%25E4%25BB%2596%25E7%259A%2584%25E3%2581%25AA%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2520Exclusive%2520%25E5%259E%258B%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25AE%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2NjNjFjNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png"
+  },
+  {
+    "id": "/wintery_fish/articles/deno-using-tempdir",
+    "title": "Denoで一時ディレクトリを自動削除するには",
+    "url": "https://zenn.dev/wintery_fish/articles/deno-using-tempdir",
+    "published": "2025-08-02T11:56:45.981Z",
+    "ogImage": "https://res.cloudinary.com/zenn/image/upload/s--M37mPpCX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%25E3%2581%25A7%25E4%25B8%2580%25E6%2599%2582%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AB%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25AE%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2NjNjFjNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png"
+  },
+  {
+    "id": "/wintery_fish/articles/jax-closured-train-step",
+    "title": "JAX の学習ステップはクロージャとして実装するといい",
+    "url": "https://zenn.dev/wintery_fish/articles/jax-closured-train-step",
+    "published": "2025-01-03T15:30:05.327Z",
+    "ogImage": "https://res.cloudinary.com/zenn/image/upload/s--0YdgIaO3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JAX%2520%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AF%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25AE%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2NjNjFjNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png"
+  }
+]
