@@ -2,15 +2,25 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import type { Collection, Tag } from "@/types.ts";
 
 export const getEntries = async <T extends Collection>(
-  collection: Collection,
+  collection: T,
 ): Promise<CollectionEntry<T>[]> => {
   const entries: CollectionEntry<T>[] = await getCollection(collection);
-  console.log(`Fetched ${entries.length} entries from collection: ${collection}`);
   return entries.sort((a, b) => {
     const dateA = new Date(a.data.published);
     const dateB = new Date(b.data.published);
     return dateB.getTime() - dateA.getTime(); // Newer entries first
   });
+};
+
+export const getEntryBySlug = async <T extends Collection>(
+  collection: T,
+  slug: string,
+): Promise<CollectionEntry<T> | undefined> => {
+  const entries: CollectionEntry<T>[] = await getCollection(
+    collection,
+    (entry) => entry.id === slug,
+  );
+  return entries.length > 0 ? entries[0] : undefined;
 };
 
 export const getTagByName = (name: string): Tag => {
@@ -23,9 +33,11 @@ export const getTagByName = (name: string): Tag => {
 export const groupEntriesByTag = <T extends Collection>(
   entries: CollectionEntry<T>[],
 ): { [tag: string]: CollectionEntry<T>[] } => {
+  if (entries.length === 0) return {};
   return entries.reduce(
     (acc, entry) => {
-      const tags = entry.data.tags || [];
+      // only read tags when they exist on this entry's data
+      const tags = "tags" in entry.data ? (entry.data.tags ?? []) : [];
       tags.forEach((tag) => {
         if (!acc[tag]) acc[tag] = [];
         acc[tag].push(entry);

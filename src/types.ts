@@ -1,4 +1,4 @@
-export type Collection = "blog";
+export type Collection = "blog" | "zenn";
 
 export type SiteConfig = {
   title: string;

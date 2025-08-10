@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 
 const blog = defineCollection({
   loader: glob({
@@ -16,4 +16,14 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const zenn = defineCollection({
+  loader: file("./contents/zenn/articles.json"),
+  schema: z.object({
+    title: z.string(),
+    url: z.string().url(),
+    published: z.string().transform((date) => new Date(date)),
+    ogImage: z.string().url(),
+  }),
+});
+
+export const collections = { blog, zenn };

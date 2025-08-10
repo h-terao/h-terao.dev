@@ -62,3 +62,8 @@ export const projectGroups: ProjectGroup[] = [
 | `bunx astro build`   | Build your production site to `./dist/`      |
 | `bunx astro dev`     | Start local dev server at `localhost:4321`   |
 | `bunx astro preview` | Preview your build locally, before deploying |
+
+## Zenn の記事読み込み
+
+`scripts/fetchZennArticles.ts` ファイルを実行することで、Zenn に公開している記事のメタデータを取得し、`src/content/zenn/` ディレクトリに保存することができます。
+（自動化したい...）

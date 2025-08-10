@@ -23,8 +23,10 @@ const { title, page, tags } = Astro.props;
       <div class="text-lg text-left text-body/60">
         Page {page.currentPage} of {page.lastPage} - {page.data.length} posts
       </div>
-      {page.data.map((entry) => (<BlogCard entry={entry} class="w-auto"/>))}
-      <Pagination page={page} class="mt-4 mb-2"/>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {page.data.map((entry) => (<BlogCard entry={entry} class="w-full"/>))}
+      </div>
+      <Pagination baseUrl="/blog" page={page} class="mt-4 mb-2"/>
     </div>
 
     <!-- Tags -->
